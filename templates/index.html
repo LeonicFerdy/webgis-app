@@ -1,0 +1,166 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBGIS Daerah Rawan Kecelakaan Kabupaten Gowa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='map-styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <h1>WEBGIS DAERAH RAWAN KECELAKAAN KABUPATEN GOWA</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="{{ url_for('upload_page') }}" style="font-weight: bold;">Upload Data</a></li>
+                <li><a href="#informasi">Informasi</a></li>
+                <li><a href="#peta">Peta</a></li>
+                <li><a href="#statistik">Statistik</a></li>
+                <li><a href="#kontak">Kontak Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="content">
+                <h2>Selamat Datang di WebGIS Daerah Rawan Kecelakaan Kabupaten Gowa</h2>
+                <p>
+                    WebGIS ini menggunakan <strong>algoritma Hotspot (Kernel Density Estimation)</strong> untuk mengidentifikasi 
+                    dan memetakan daerah rawan kecelakaan lalu lintas di Kabupaten Gowa. Sistem ini menggabungkan data kecelakaan 
+                    historis dengan analisis spasial untuk memberikan visualisasi yang akurat dan informatif.
+                </p>
+                <p>
+                    Melalui analisis KDE, sistem dapat mendeteksi pola kepadatan kecelakaan dan mengidentifikasi hotspot area 
+                    yang memerlukan perhatian khusus dalam hal keselamatan jalan. Data ini sangat berguna untuk perencanaan 
+                    infrastruktur dan strategi pencegahan kecelakaan.
+                </p>
+                <p>
+                    Gunakan fitur interaktif untuk mengeksplorasi data dan mari bersama-sama berkontribusi untuk menciptakan 
+                    jalan yang lebih aman di Kabupaten Gowa.
+                </p>
+                
+            </div>
+        </section>
+
+        <!-- Informasi Section -->
+        <section id="informasi" class="section">
+            <h2>Informasi Sistem</h2>
+            
+            <div class="legend">
+                <h3>Legenda Tingkat Kecelakaan</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: green;"></div>
+                    <div>
+                        <strong>Kecelakaan Ringan</strong><br>
+                        <small>Kerusakan kecil, tanpa korban luka berat</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: orange;"></div>
+                    <div>
+                        <strong>Kecelakaan Sedang</strong><br>
+                        <small>Kerusakan signifikan, korban luka ringan-sedang</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: red;"></div>
+                    <div>
+                        <strong>Kecelakaan Berat</strong><br>
+                        <small>Kerusakan parah, korban luka berat atau meninggal</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Algoritma Hotspot</h3>
+                    <p>Menggunakan Kernel Density Estimation (KDE) untuk mengidentifikasi area dengan kepadatan kecelakaan tinggi.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Analisis Spasial</h3>
+                    <p>Mengintegrasikan data jarak jalan dengan OSMnx untuk analisis yang lebih akurat.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Visualisasi Interaktif</h3>
+                    <p>Peta interaktif dengan berbagai layer dan filter untuk eksplorasi data yang mendalam.</p>
+                </div>
+            </div>
+
+            <section class="section bg-light">
+                <h3>Cara Menggunakan Peta Interaktif</h3>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>Gunakan <strong>Layer Control</strong> untuk menampilkan/menyembunyikan data</li>
+                    <li>Aktifkan/nonaktifkan <strong>filter kecelakaan</strong> berdasarkan tingkat keparahan</li>
+                    <li>Klik pada <strong>titik kecelakaan</strong> untuk melihat detail informasi</li>
+                    <li>Klik pada <strong>area hotspot</strong> untuk melihat tingkat kepadatan</li>
+                    <li>Gunakan kontrol zoom untuk memperbesar area yang diminati</li>
+                    <li>Ganti <strong>basemap</strong> antara peta jalan dan citra satelit</li>
+                    <li><strong>🆕 Upload data baru</strong> melalui menu Upload untuk analisis custom</li>
+                </ul>
+            </section>
+        </section>
+
+        <!-- Peta Section -->
+        <section id="peta" class="section">
+            <h2>Peta Interaktif Hotspot Kecelakaan</h2>
+            
+            <div class="control-panel">
+                <h3>Filter Kecelakaan</h3>
+                
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <input type="checkbox" id="filter-ringan" checked>
+                        <label for="filter-ringan">Kecelakaan Ringan</label>
+                    </div>
+                    <div class="filter-item">
+                        <input type="checkbox" id="filter-sedang" checked>
+                        <label for="filter-sedang">Kecelakaan Sedang</label>
+                    </div>
+                    <div class="filter-item">
+                        <input type="checkbox" id="filter-berat" checked>
+                        <label for="filter-berat">Kecelakaan Berat</label>
+                    </div>
+                </div>
+
+                <!-- Upload Results Indicator -->
+                <div id="uploadResultsIndicator" style="display: none; margin-top: 15px; padding: 10px 15px; background: #d5f4e6; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✅ Showing Results from Uploaded Data</strong>
+                    <p style="margin: 5px 0 0 0; color: #2c3e50; font-size: 0.9rem;">Displaying hotspot analysis from your uploaded file</p>
+                </div>
+            </div>
+
+            <!-- Peta -->
+            <div id="map"></div>
+        </section>
+
+        <!-- Statistik Section -->
+        <section id="statistik" class="section bg-light">
+            <h2>Statistik Kecelakaan</h2>
+            <div id="statistics" class="statistics-panel">
+                <p>Memuat statistik...</p>
+            </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section id="kontak" class="section">
+            <h2>Kontak Kami</h2>
+            <p>Email: <a href="mailto:ferdyleonic@gmail.com">ferdyleonic@gmail.com</a></p>
+            <p>Telepon: <a href="tel:+6281234567890">0812-3456-7890</a></p>
+            <p><strong>Penelitian:</strong> Implementasi Algoritma Hotspot untuk Sistem Visualisasi Daerah Rawan Kecelakaan Lalu Lintas Berbasis WebGIS</p>
+        </section>
+    </main>
+    
+     <footer>
+        <p>&copy; 2024 WebGIS Kabupaten Gowa - Implementasi Algoritma Hotspot KDE. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

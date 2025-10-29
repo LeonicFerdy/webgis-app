@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data - WebGIS Daerah Rawan Kecelakaan Kabupaten Gowa</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+</head>
+<body>
+    <!-- Header - Match dengan index.html -->
+    <header>
+        <h1>WEBGIS DAERAH RAWAN KECELAKAAN KABUPATEN GOWA</h1>
+        <nav>
+             <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="#" style="color: #ffdd59;">Upload Data</a></li>
+                <li><a href="{{ url_for('index', _anchor='informasi') }}">Informasi</a></li>
+                <li><a href="{{ url_for('index', _anchor='peta') }}">Peta</a></li>
+                <li><a href="{{ url_for('index', _anchor='statistik') }}">Statistik</a></li>
+                <li><a href="{{ url_for('index', _anchor='kontak') }}">Kontak Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Upload Section -->
+        <section class="section">
+            <div class="content">
+                <h2>Upload Data Kecelakaan untuk Analisis Hotspot</h2>
+                <p>
+                    Upload file data kecelakaan Anda untuk analisis hotspot otomatis menggunakan 
+                    <strong>algoritma Kernel Density Estimation (KDE)</strong>. Sistem akan secara 
+                    otomatis menghitung area rawan kecelakaan dan jalan berisiko tinggi.
+                </p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="control-panel">
+                <h3>Upload File Data</h3>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h4>Drop your file here</h4>
+                    <p>or click to browse</p>
+                    <div class="supported-formats">
+                        <span>Supported: <strong>.xlsx, .csv, .geojson</strong></span>
+                    </div>
+                    <input type="file" id="fileInput" accept=".xlsx,.csv,.geojson" hidden>
+                </div>
+                
+                <!-- Required Columns -->
+                <div class="requirements-info">
+                    <h4>Required Columns:</h4>
+                    <div class="requirements-grid">
+                        <div class="req-item">📍 <strong>Latitude/Lintang</strong></div>
+                        <div class="req-item">📍 <strong>Longitude/Bujur</strong></div>
+                        <div class="req-item">📅 <strong>Tanggal Kejadian</strong></div>
+                        <div class="req-item">⚠️ <strong>Tingkat Kecelakaan</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Preview Section (Hidden initially) -->
+        <section class="section" id="previewSection" style="display: none;">
+            <h2>Preview Data</h2>
+            <div class="statistics-panel">
+                <div id="fileInfo">
+                    <!-- File info akan diisi oleh JavaScript -->
+                </div>
+                <div id="validationStatus" class="validation-status">
+                    <!-- Validation results akan diisi oleh JavaScript -->
+                </div>
+                <div id="dataSample" class="data-sample">
+                    <!-- Sample data akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section (Hidden initially) -->
+        <section class="section" id="processSection" style="display: none;">
+            <h2>Process Data</h2>
+            
+            <div class="control-panel">
+                <!-- Process Controls -->
+                <div class="process-controls">
+                    <button id="processBtn" class="btn-primary">
+                        🚀 Calculate Hotspots
+                    </button>
+                    <button id="resetBtn" class="btn-secondary">
+                        🔄 Reset
+                    </button>
+                </div>
+
+                <!-- Progress Area (Hidden initially) -->
+                <div class="progress-container" id="progressArea" style="display: none;">
+                    <h4>Processing Status</h4>
+                    
+                    <div class="progress-info">
+                        <div class="progress-phase" id="progressPhase">Initializing...</div>
+                        <div class="progress-eta" id="progressEta">Calculating time...</div>
+                    </div>
+                    
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">0%</div>
+                    </div>
+                    
+                    <div class="progress-details">
+                        <div class="detail-item">
+                            <span>Processed: </span>
+                            <span id="processedCount">0</span> / 
+                            <span id="totalCount">0</span> points
+                        </div>
+                        <div class="detail-item">
+                            <span>Workers: </span>
+                            <div class="worker-indicators" id="workerStatus">
+                                <span class="worker">💻</span>
+                                <span class="worker">💻</span>
+                                <span class="worker">💻</span>
+                                <span class="worker">💻</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="current-task" id="currentTask">
+                        Waiting to start...
+                    </div>
+                </div>
+
+                <!-- Results Area (Hidden initially) -->
+                <div class="results-summary" id="resultsArea" style="display: none;">
+                    <h4>Results Summary</h4>
+                    <div id="resultsStats" class="stats-grid">
+                        <!-- Results akan diisi oleh JavaScript -->
+                    </div>
+                    <div class="results-actions">
+                        <button id="viewResultsBtn" class="btn-primary">
+                            🗺️ View on Map
+                        </button>
+                        <button id="downloadResultsBtn" class="btn-secondary">
+                            💾 Download Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer - Match dengan index.html -->
+    < <footer>
+        <p>&copy; 2024 WebGIS Kabupaten Gowa - Implementasi Algoritma Hotspot KDE. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <script src="{{ url_for('static', filename='upload.js') }}"></script>
+</body>
+</html>
