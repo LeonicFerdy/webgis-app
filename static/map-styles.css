@@ -1,0 +1,298 @@
+/* Map Container */
+#map {
+    position: relative;
+}
+
+/* Map Control Styles */
+.map-controls {
+    position: absolute;
+    top: 10px;
+    left: 90px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 160px;
+    pointer-events: auto;
+}
+
+.map-control-btn {
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #3498db;
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    color: #3498db;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(3px);
+    text-align: center;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-control-btn:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(52, 152, 219, 0.3);
+}
+
+.map-control-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.map-control-btn.danger {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.map-control-btn.danger:hover {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+.map-control-btn.success {
+    border-color: #27ae60;
+    color: #27ae60;
+}
+
+.map-control-btn.success:hover {
+    background: #27ae60;
+    color: white;
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.map-control-btn.warning {
+    border-color: #f39c12;
+    color: #f39c12;
+}
+
+.map-control-btn.warning:hover {
+    background: #f39c12;
+    color: white;
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 10001;
+    animation: slideInLeft 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 300px;
+    font-size: 14px;
+}
+
+.notification.info {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-left: 4px solid #2980b9;
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-left: 4px solid #c0392b;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    border-left: 4px solid #229954;
+}
+
+.notification.warning {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border-left: 4px solid #e67e22;
+}
+
+@keyframes slideInLeft {
+    from { 
+        transform: translateX(-100%) scale(0.8); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0) scale(1); 
+        opacity: 1; 
+    }
+}
+
+/* Search Control Styles */
+.leaflet-control.search-control {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.leaflet-control.search-control input {
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.leaflet-control.search-control input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+.leaflet-control.search-control button {
+    padding: 10px 15px;
+    margin-left: 8px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.leaflet-control.search-control button:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Custom Leaflet Control Styles */
+.leaflet-control-layers {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    line-height: 1.3;
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255,255,255,0.3);
+    min-width: 140px;
+    margin-top: 5px;
+}
+
+.leaflet-control-layers-expanded {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.leaflet-control-layers-selector {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.leaflet-control-layers label {
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    padding: 3px 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.leaflet-control-layers label:hover {
+    color: #3498db;
+}
+
+/* Popup Styles */
+.leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.leaflet-popup-content {
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.5;
+}
+
+.leaflet-popup-content h4 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.leaflet-popup-content p {
+    margin: 5px 0;
+}
+
+.leaflet-popup-content strong {
+    color: #2c3e50;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .map-controls {
+        top: 10px;
+        left: 75px;
+        gap: 4px;
+        max-width: 130px;
+    }
+    
+    .map-control-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+        min-height: 24px;
+        border-radius: 15px;
+    }
+    
+    .notification {
+        left: 10px;
+        max-width: 220px;
+        font-size: 12px;
+        top: 70px;
+    }
+    
+    .leaflet-control-layers {
+        font-size: 11px;
+        min-width: 120px;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-controls {
+        top: 10px;
+        left: 65px;
+        flex-direction: column;
+        max-width: 120px;
+        gap: 3px;
+    }
+    
+    .map-control-btn {
+        font-size: 9px;
+        padding: 4px 6px;
+        min-height: 22px;
+        border-radius: 12px;
+    }
+    
+    .leaflet-control-layers {
+        font-size: 10px;
+        min-width: 100px;
+        padding: 5px;
+    }
+    
+    .notification {
+        font-size: 11px;
+        max-width: 200px;
+        top: 60px;
+        left: 5px;
+    }
+}

@@ -1,0 +1,661 @@
+/* Upload Page Additional CSS - extends style.css */
+
+/* Upload Area Styling */
+.upload-area {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border: 3px dashed #3498db;
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+.upload-area:hover {
+    border-color: #2980b9;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+}
+
+.upload-area.dragover {
+    border-color: #27ae60;
+    background: linear-gradient(135deg, #d5f4e6, #ffffff);
+    border-style: solid;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.upload-area h4 {
+    color: #2c3e50;
+    margin: 10px 0;
+    font-size: 1.3rem;
+}
+
+.upload-area p {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.supported-formats {
+    background: #ecf0f1;
+    padding: 10px 15px;
+    border-radius: 25px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.supported-formats span {
+    font-size: 0.9rem;
+    color: #5a6c7d;
+}
+
+/* Requirements Info */
+.requirements-info {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-radius: 12px;
+    border-left: 4px solid #3498db;
+}
+
+.requirements-info h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.req-item {
+    background: #ffffff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.req-item:hover {
+    border-color: #3498db;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1);
+}
+
+/* Button Styling - Match dengan design existing */
+.btn-primary {
+    background: linear-gradient(90deg, #2c3e50, #4a69bd);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #34495e, #5a73d8);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.process-controls {
+    text-align: center;
+    margin: 25px 0;
+}
+
+/* Progress Styling */
+.progress-container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 1px solid #bdc3c7;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progress-phase {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.progress-eta {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.progress-bar-wrapper {
+    position: relative;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #2c3e50;
+}
+
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.detail-item {
+    color: #5a6c7d;
+    font-size: 0.9rem;
+}
+
+.worker-indicators {
+    display: flex;
+    gap: 8px;
+}
+
+.worker {
+    font-size: 1.2rem;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.worker.active {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.current-task {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    margin-top: 15px;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+/* Results Styling */
+.results-summary {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 1px solid #27ae60;
+    border-left: 4px solid #27ae60;
+}
+
+.results-actions {
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Validation Status */
+.validation-status {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.validation-item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.validation-item.success {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.validation-item.warning {
+    background: #fef9e7;
+    color: #f39c12;
+}
+
+.validation-item.error {
+    background: #fadbd8;
+    color: #e74c3c;
+}
+
+/* Data Sample Table */
+.data-sample {
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.sample-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sample-table th,
+.sample-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.sample-table th {
+    background: #34495e;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.sample-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Action Cards */
+.action-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    background: linear-gradient(135deg, #e8f4f8, #f8f9fa);
+    border-color: #3498db;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-content {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ecf0f1;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.loading-content p {
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* File Info Display */
+.file-info {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #3498db;
+}
+
+.file-info h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.file-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.file-stat {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #bdc3c7;
+    transition: all 0.3s ease;
+}
+
+.file-stat:hover {
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1);
+}
+
+.file-stat .stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+}
+
+.file-stat .stat-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+}
+
+/* Responsive Design untuk Upload Page */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 30px 15px;
+    }
+    
+    .upload-icon {
+        font-size: 3rem;
+    }
+    
+    .upload-area h4 {
+        font-size: 1.1rem;
+    }
+    
+    .requirements-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .req-item {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .progress-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .progress-details {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .file-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .worker-indicators {
+        justify-content: center;
+    }
+    
+    .loading-content {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-area {
+        padding: 25px 10px;
+    }
+    
+    .upload-icon {
+        font-size: 2.5rem;
+    }
+    
+    .file-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .sample-table {
+        font-size: 0.8rem;
+    }
+    
+    .sample-table th,
+    .sample-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* Notification Styling (jika belum ada di style.css) */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: #27ae60;
+}
+
+.notification.error {
+    background: #e74c3c;
+}
+
+.notification.warning {
+    background: #f39c12;
+}
+
+.notification.info {
+    background: #3498db;
+}
+
+/* Animation untuk smooth transitions */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus states untuk accessibility */
+.upload-area:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+input[type="file"]:focus + .upload-area {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}/* Upload Page CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #d7d7d7 0%, #d7d7d7 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Navigation */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.nav-brand h1 {
+    color: #007cba;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-brand i {
+    margin-right: 0.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #007cba;
+    background-color: #007cba;
+}
